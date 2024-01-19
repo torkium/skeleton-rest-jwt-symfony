@@ -110,3 +110,15 @@ Openssl doit être installé !
             - { path: ^/api/register, roles: PUBLIC_ACCESS  }
             - { path: ^/api/login, roles: PUBLIC_ACCESS  }
             - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+
+13 - Tester l'API
+
+Via postman, créer une requête GET
+
+    http://127.0.0.1:8000/api/login_check
+Avec un body de type json
+
+    {
+        "username": "torkium",
+        "password": "password"
+    }
