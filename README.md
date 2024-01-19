@@ -61,39 +61,40 @@ php bin/console security:hash-password
 INSERT INTO `user` (`id`, `email`, `username`, `roles`, `password`) VALUES (NULL, 'julien.taront@gmail.com', 'torkium', '[]', '$2y$13$HUbtMvkr9j4WqgFJxIHv.O5X1/otD1MwCphYyKB.YU0iHCix4/U/q');
 
 12 - Configurer le Secyrity.yaml
-security:
-    enable_authenticator_manager: true
-    password_hashers:
-        App\Entity\User: 'auto'
-        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
-            algorithm: 'auto'
-            cost:      15
-    providers:
-        app_user_provider:
-            entity:
-                class: App\Entity\User
-                property: username
-    firewalls:
-        login:
-            pattern: ^/api/login
-            stateless: true
-            json_login:
-                check_path: /api/login_check
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
-  
-        api:
-            pattern:   ^/api
-            stateless: true
-            jwt: ~
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        main:
-            lazy: true
-            provider: app_user_provider
-  
-    access_control:
-        - { path: ^/api/register, roles: PUBLIC_ACCESS  }
-        - { path: ^/api/login, roles: PUBLIC_ACCESS  }
-        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+
+    security:
+        enable_authenticator_manager: true
+        password_hashers:
+            App\Entity\User: 'auto'
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: 'auto'
+                cost:      15
+        providers:
+            app_user_provider:
+                entity:
+                    class: App\Entity\User
+                    property: username
+        firewalls:
+            login:
+                pattern: ^/api/login
+                stateless: true
+                json_login:
+                    check_path: /api/login_check
+                    success_handler: lexik_jwt_authentication.handler.authentication_success
+                    failure_handler: lexik_jwt_authentication.handler.authentication_failure
+    
+            api:
+                pattern:   ^/api
+                stateless: true
+                jwt: ~
+            dev:
+                pattern: ^/(_(profiler|wdt)|css|images|js)/
+                security: false
+            main:
+                lazy: true
+                provider: app_user_provider
+      
+        access_control:
+            - { path: ^/api/register, roles: PUBLIC_ACCESS  }
+            - { path: ^/api/login, roles: PUBLIC_ACCESS  }
+            - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
