@@ -2,7 +2,7 @@ Openssl doit être installé !
 
 1 - Créer le projet symfony
 
-    composer create-project symfony/website-skeleton symfony_rest_auth_jwt
+    composer create-project symfony/skeleton symfony_rest_auth_jwt
 
 2 - Installer les packages nécessaires
 
